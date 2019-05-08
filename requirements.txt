@@ -1,0 +1,7 @@
+pickle
+numpy
+pandas
+google-api-python-client
+ldap3
+srvlookup
+honcho

@@ -1,0 +1,12 @@
+---
+provider:
+  name: faas
+  gateway: https://functions.dallasmakerspace.org:8080
+functions:
+  slack-interactive:
+  lang: python
+  handler: python -m func-dms-prereq.py
+  image: dallas-makerspace/func-dms-prereq:latest
+  environment:
+    content_type: application/json
+...
