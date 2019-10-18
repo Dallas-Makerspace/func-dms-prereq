@@ -81,10 +81,11 @@ def get_google_sheet(sheet_id, range_name='Form Responses 1!D:D'):
 
     return results
 
-def append_ldap_groups(conn, domain, user_dn, group_dn):
+def append_ldap_groups(conn, user_dn, group_dn):
     """
     Adds user to group
     """
+    conn.modify(user_dn, {'memberOf': [(MODIFY_ADD, group_dn)]}
     return False
 
 def get_ldap_groups(conn, domain, group_name, attributes):
@@ -100,7 +101,7 @@ def get_ldap_groups(conn, domain, group_name, attributes):
     results = conn.search({
         'search_base': 'cn=Groups,{}'.format(domain),
         'search_filter': ldap_filter,
-        'attributes': attributes or list('member')
+        'attributes': attributes or list('memberOf')
     })
 
     return pd.Series(results.entries) if results else pd.Series(list())
